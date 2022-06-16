@@ -16,7 +16,7 @@
 		이름(name) <input type="text" name="name" value="${personVo.name }"><br>
 		핸드폰(hp) <input type="text" name="hp" value="${personVo.hp }"><br>
 		회사(company) <input type="text" name="company" value="${personVo.company }"><br>
-		pk(personId) <input type="text" name="personId" value="${param.id }"><br>
+		pk(personId) <input type="text" name="personId" value="${param.no }"><br>
 		
 		<br>
 		<button type="submit">수정</button>

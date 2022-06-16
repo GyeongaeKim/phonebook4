@@ -39,9 +39,9 @@ public class PhoneService {
 	}
 	
 	//전화번호 삭제
-	public int personDelete (int num) {
+	public int personDelete(int no) {
 		System.out.println("PhoneService>personDelete()");
-		int count = phoneDao.personDelete(num);
+		int count = phoneDao.personDelete(no);
 		return count;
 	}
 	

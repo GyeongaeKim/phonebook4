@@ -61,7 +61,7 @@ public class PhoneController{
 	//등록메소드
 	//3. 전화번호 등록***
 	@RequestMapping(value="/write", method={RequestMethod.GET, RequestMethod.POST})
-	public String write(@ModelAttribute PersonVo personVo) { 
+	public String write(Model model, @ModelAttribute PersonVo personVo) { 
 		/* 파라미터를 하나하나 꺼낼필요 없이 한꺼번에 Vo로 꺼내올 수 있다*/
 		
 		/*(@ModelAttribute PersonVo personVo,
@@ -121,18 +121,13 @@ public class PhoneController{
 	
 	
 	//4. 전화번호 삭제
-	@RequestMapping(value="/delete/{no}", method={RequestMethod.GET, RequestMethod.POST})
-	public String delete(@PathVariable("no") int num) {
+	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delete(@RequestParam("no") int no) {
 		System.out.println("PhoneController>delete()");
-		
-		//주소에서 값 꺼내기
-		System.out.println(num);
-		
-		//Dao로 처리하기(삭제)
-		//PhoneDao phoneDao = new PhoneDao();
-		int count = phoneService.personDelete(num);
-		System.out.println(count);
-		
+
+		// Service를 통해서 삭제한다
+		int count = phoneService.personDelete(no);
+
 		return "redirect:/list";
 	}
 	
@@ -169,7 +164,7 @@ public class PhoneController{
 	
 	//6. 전화번호 수정
 	@RequestMapping(value="/update", method={RequestMethod.GET, RequestMethod.POST})
-	public String update(@ModelAttribute PersonVo personVo) {
+	public String update(Model model, @ModelAttribute PersonVo personVo) {
 		System.out.println("PhoneController>update()");
 		
 		//PhoneDao personUpdate()로 수정하기
