@@ -4,9 +4,22 @@
 <mapper namespace="phonebook">
 	
 	<!-- 쿼리문 작성 -->
+	<resultMap id="resultMapPersonVo" type="com.javaex.vo.PersonVo" >
+	    <result column="person_id" property="personId" />
+	    <result column="name" property="name" />
+	    <result column="hp" property="hp" />
+	    <result column="company" property="company" />
+	</resultMap>
 	
 	
-	<select id="selectList" resultType="com.javaex.vo.PersonVo">
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectList" resultMap="resultMapPersonVo">
 		<![CDATA[
 			select  person_id personId,
 					name,
@@ -18,7 +31,7 @@
 	</select>
 	
 	
-	<insert id="personInsert" parameterType="com.javaex.vo.PersonVo">
+	<insert id="personInsert" parameterType="PersonVo">
 		<![CDATA[
 			insert into person
 			values (seq_person_id.nextval, #{name}, #{hp}, #{company})
@@ -34,7 +47,7 @@
 	</delete>
 	
 	
-	<select id="getPerson" parameterType="int" resultType="com.javaex.vo.PersonVo">
+	<select id="getPerson" parameterType="int" resultMap="resultMapPersonVo">
 		<![CDATA[
 			select  person_id personId,
 					name,
@@ -46,7 +59,7 @@
 	</select>
 	
 	
-	<update id="personUpdate" parameterType="com.javaex.vo.PersonVo">
+	<update id="personUpdate" parameterType="PersonVo">
 		<![CDATA[
 			update person
 			set name = #{name},

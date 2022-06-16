@@ -61,7 +61,7 @@ public class PhoneController{
 	//등록메소드
 	//3. 전화번호 등록***
 	@RequestMapping(value="/write", method={RequestMethod.GET, RequestMethod.POST})
-	public String write(Model model, @ModelAttribute PersonVo personVo) { 
+	public String write(@ModelAttribute PersonVo personVo) { 
 		/* 파라미터를 하나하나 꺼낼필요 없이 한꺼번에 Vo로 꺼내올 수 있다*/
 		
 		/*(@ModelAttribute PersonVo personVo,
@@ -164,7 +164,7 @@ public class PhoneController{
 	
 	//6. 전화번호 수정
 	@RequestMapping(value="/update", method={RequestMethod.GET, RequestMethod.POST})
-	public String update(Model model, @ModelAttribute PersonVo personVo) {
+	public String update(@ModelAttribute PersonVo personVo) {
 		System.out.println("PhoneController>update()");
 		
 		//PhoneDao personUpdate()로 수정하기
