@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,29 +61,15 @@ public class PhoneController{
 	
 	//등록메소드
 	//3. 전화번호 등록***
-	@RequestMapping(value="/write", method={RequestMethod.GET, RequestMethod.POST})
-	public String write(@ModelAttribute PersonVo personVo) { 
-		/* 파라미터를 하나하나 꺼낼필요 없이 한꺼번에 Vo로 꺼내올 수 있다*/
-		
-		/*(@ModelAttribute PersonVo personVo,
-		 					@RequestParam("age") int age,
-		 					@RequestParam("name") String name)*/
-		/* Vo와 함께 필요한 파라미터들을 따로 꺼낼수도 있다. */
+	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
+	public String write(@ModelAttribute PersonVo personVo) {
 		System.out.println("PhoneController>write()");
-		
-		
-		//파라미터 꺼낼 필요 없어짐
-		//파라미터들을 한꺼번에 personVo로 꺼냈음-> 개별의 파라미터들을 vo로 묶을 필요가 없음
-		System.out.println(personVo);
-		//System.out.println(age);
 
-		//Service를 통해서 저장한다
-		//PhoneDao phoneDao = new PhoneDao();
-		phoneService.personInsert(personVo);
-		
-		
-		//리다이렉트
-		//리스트로 리다이렉트 시킬 예정(포워드 x)
+		// Service를 통해서 저장한다
+		//int count = phoneService.personInsert(personVo);
+		int count = phoneService.personInsert2();
+
+		// 리다이렉트
 		return "redirect:/list";
 	}
 	
@@ -161,6 +148,20 @@ public class PhoneController{
 		
 		return "updateForm";
 	}
+	
+	
+	//***. 전화번호 수정폼2
+	@RequestMapping(value="/updateForm2", method= {RequestMethod.GET, RequestMethod.POST})
+	public String updateForm2(Model model, @RequestParam("no") int no) {
+		System.out.println("PhoneController>updateForm2()");
+		
+		Map<String, Object> pMap = phoneService.getPerson2(no);
+		
+		model.addAttribute("pMap", pMap);
+		
+		return "updateForm2";
+	}
+	
 	
 	//6. 전화번호 수정
 	@RequestMapping(value="/update", method={RequestMethod.GET, RequestMethod.POST})

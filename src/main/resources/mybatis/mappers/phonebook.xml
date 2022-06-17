@@ -18,7 +18,7 @@
 	
 	
 	
-	
+	<!-- 전화번호 리스트 -->
 	<select id="selectList" resultMap="resultMapPersonVo">
 		<![CDATA[
 			select  person_id personId,
@@ -31,6 +31,7 @@
 	</select>
 	
 	
+	<!-- 전화번호 등록 getter -->
 	<insert id="personInsert" parameterType="PersonVo">
 		<![CDATA[
 			insert into person
@@ -39,6 +40,14 @@
 	</insert>
 	
 	
+	<!-- 전화번호 등록2 Map이용 key값 -->
+	<insert id="personInsert2" parameterType="map">
+			insert into person
+			values (seq_person_id.nextval, #{name}, #{hp}, #{company})
+	</insert>
+	
+	
+	<!-- 전화번호 삭제 -->
 	<delete id="personDelete" parameterType="int">
 		<![CDATA[
 			delete from person
@@ -47,6 +56,7 @@
 	</delete>
 	
 	
+	<!-- 정보1 불러오기 -->
 	<select id="getPerson" parameterType="int" resultMap="resultMapPersonVo">
 		<![CDATA[
 			select  person_id personId,
@@ -59,6 +69,20 @@
 	</select>
 	
 	
+	<!-- 정보1 불러오기 2 / map 사용 -->
+	<select id="getPerson2" parameterType="int" resultType="map">
+		<![CDATA[
+			select  person_id personId,
+        			name,
+			        hp,
+			        company
+			from person
+			where person_id= #{no}
+		]]>
+	</select>
+	
+	
+	<!-- 전화번호 수정 -->
 	<update id="personUpdate" parameterType="PersonVo">
 		<![CDATA[
 			update person
